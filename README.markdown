@@ -1,4 +1,6 @@
-== Info
+Course Crawler
+============
+
 This crawl program successfully aggregated Columbia course and related
 information as of Sunday, February 20, 2011. Columbia's data formats are
 subject to change, and I can not guarantee that this program will be
@@ -8,33 +10,44 @@ Questions, comments, and concerns should be directed at:
 Ryan Bubinski. ryanbubinski <at> gmail <dot> com.
 
 
-== Dependencies
+Dependencies
+------------
+
 Ruby 1.8.7>=
 MySQL 5.0>=
 
 
-== Setup
+Installation and Setup
+------------
 
-Copy "config.yaml.default" to "config.yaml"
+Before beginning, make sure you have Ruby 1.8.7 or later and MySQL 5.0 or
+later installed.
 
-Complete the following fields in config.yaml
+- Copy "config.yaml.default" to "config.yaml"
+- Complete the following fields in config.yaml
   database:
     adapter: mysql
     host: [localhost]
     username: [db_username]  
     password: [db_user_passwd]
     database: [db_name]
-
-Run the following commands in the terminal window:
-  gem install bundler
-  bundle install
-  ruby app.rb
+- run `gem install bundler`
+- run `bundle install`
 
 
-== Export data
+Crawling
+------------
+
+Once you've set up the application, run the app.rb file in the root directory
+to begin the crawling process.
+
+
+Exporting data
+------------
+
 Data is stored in a local database, which can be exported to a text file
 in SQL format using the command:
 
-rake db:export
+`rake db:export`
 
 The result is stored in the local directory in a file named "data.sql"

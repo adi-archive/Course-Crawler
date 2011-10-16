@@ -1,7 +1,8 @@
 database:
-  host: localhost            
-  username: db_username     
-  password: db_user_passwd
+  host: localhost
+  username: db_username
   database: db_name
+  password: db_user_passwd
 
+debug_mode: false
 database_export_filename: "data.sql"
