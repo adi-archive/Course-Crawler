@@ -1,7 +1,7 @@
 source :rubygems
 
 gem 'activerecord'
-gem 'nokogiri', "~> 1.4"
+gem 'nokogiri', '~> 1.4'
 gem 'rake'
 
 # database adapter

@@ -10,7 +10,7 @@ require 'open-uri'
 APP_CONFIG = YAML::load( File.open( "config.yaml" ) )
 
 # Load models
-require 'models/*'
+ Dir.glob(File.dirname(__FILE__) + '/models/*') {|file| require file}
 
 # Configure DataMapper ORM
 DataMapper::Logger.new($stdout, :debug) if APP_CONFIG["debug_mode"]
