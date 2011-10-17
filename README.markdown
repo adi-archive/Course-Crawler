@@ -10,11 +10,11 @@ Questions, comments, and concerns should be directed at:
 Ryan Bubinski. ryanbubinski <at> gmail <dot> com.
 
 
-Dependencies
+Binary Dependencies
 ------------
 
-Ruby 1.8.7>=
-MySQL 5.0>=
+- Ruby 1.8.7>=
+- MySQL 5.0>=
 
 
 Installation and Setup
@@ -23,14 +23,8 @@ Installation and Setup
 Before beginning, make sure you have Ruby 1.8.7 or later and MySQL 5.0 or
 later installed.
 
-- Copy "config.yaml.default" to "config.yaml"
-- Complete the following fields in config.yaml
-  database:
-    adapter: mysql
-    host: [localhost]
-    username: [db_username]  
-    password: [db_user_passwd]
-    database: [db_name]
+- Copy `config.yaml.default` to `config.yaml`
+- Complete the fields in `config.yaml`
 - run `gem install bundler`
 - run `bundle install`
 
@@ -40,6 +34,8 @@ Crawling
 
 Once you've set up the application, run the app.rb file in the root directory
 to begin the crawling process.
+
+HTTP requests are made in parallel using the Typhoeus gem.
 
 
 Exporting data

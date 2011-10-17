@@ -3,5 +3,5 @@ class Instructor
   property :id, Serial
   property :name, String, :length => 256
 
-  has n, :sections  
+  has n, :sections
 end
