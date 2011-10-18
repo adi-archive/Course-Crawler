@@ -36,4 +36,4 @@ puts "Loaded section urls"
 Section.crawl(section_urls)
 
 # Crawl courses (urls from sections)
-# Course.crawl
+Course.crawl

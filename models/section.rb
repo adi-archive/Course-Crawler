@@ -28,12 +28,10 @@ class Section
   # new section objects to hold the scraped data
   def self.crawl(section_urls)
     hydra = Typhoeus::Hydra.new(:max_concurrency => MAX_CONCURRENCY)
-    section_requests = []
 
     # build http requests for each section html page
     section_urls.each do |section_url|
       request = self.url_request(section_url)
-      section_requests << request
       hydra.queue request
     end
 
