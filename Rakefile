@@ -2,6 +2,7 @@
 require 'rubygems'
 require 'bundler/setup'
 Bundler.require(:default)
+
 require 'csv'
 require 'mysql2'
 
@@ -14,12 +15,12 @@ namespace :db do
     system("mysqladmin -u #{APP_CONFIG["database"]["username"]} -p'#{APP_CONFIG["database"]["password"]}' create #{APP_CONFIG["database"]["database"]}")
   end
   
-  desc "Drop all tables"
+  desc "Drop database" 
   task :drop do
     system("mysqladmin -u #{APP_CONFIG["database"]["username"]} -p'#{APP_CONFIG["database"]["password"]}' drop #{APP_CONFIG["database"]["database"]}")
   end
   
-  desc "Seed database with data in ./seeds/"
+  desc "Seed database with data in ./fixtures/"
   task :seed do
     seed_db
   end
@@ -35,20 +36,20 @@ def seed_db
     :host => APP_CONFIG["database"]["host"],
     :username => APP_CONFIG["database"]["username"],
     :password => APP_CONFIG["database"]["password"],
-    :database => APP_CONFIG["database"]["database"],
+    :database => APP_CONFIG["database"]["database"]
     )
     
-  Dir["./seeds/*.csv"].each do |file|
+  Dir["./fixtures/*.csv"].each do |file|
     table_name = File.basename(file, ".csv")
 
     # clear rows in table
-    db.query( "DELETE FROM #{table_name}" )
+    db.query("DELETE FROM #{table_name}")
 
     # read data from csv file
-    data = CSV.read( file, { 
+    data = CSV.read(file, { 
       :col_sep => ', ', 
       :quote_char => '"'
-      })
+    })
 
     column_names = data[0]
     data.delete_at(0)
@@ -62,7 +63,7 @@ def seed_db
     end  
     
     # run query on db connection
-    db.query( query << inserts.join(',') << ";" )
+    db.query("#{query}#{inserts.join(',')};")
   end
   db.close
 end
