@@ -18,8 +18,9 @@ class Subject
 
     subject_urls = []
     elements = doc.css('a')
-    elements.slice(5, elements.size).each_with_index do |element, index|
-      subject_urls << "#{BASE_URL}#{element.content}"
+    elements.each do |element|
+      match = /[A-Z]{4}/.match(element.attributes['href'].value)
+      subject_urls << "#{BASE_URL}#{match}" if !subject_urls.include? match 
     end
 
     subject_urls.uniq
