@@ -9,7 +9,7 @@ class Course
 
   has n, :sections
 
-  BASE_URL = "http://www.college.columbia.edu/unify/getApi/bulletinSearch.php?courseIdentifierVar="
+  BASE_URL = "http://apps.college.columbia.edu/unify/getApi/bulletinSearch.php?courseIdentifierVar="
   MAX_CONCURRENCY = 100
 
 
