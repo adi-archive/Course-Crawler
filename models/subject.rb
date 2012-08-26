@@ -8,22 +8,23 @@ class Subject
 
   has n, :sections
 
-  BASE_URL = "http://www.columbia.edu/cu/bulletin/uwb/subj/"
+  SUBJECT_URL = "http://www.columbia.edu/cu/bulletin/uwb/sel/subjects.html"
+  BASE_URL = "http://www.columbia.edu/cu/bulletin/uwb/subj"
   MAX_CONCURRENCY = 100
 
 
   # Return array of all subject urls
   def self.get_subject_urls
-    doc = Nokogiri::HTML(open(BASE_URL))
+    doc = Nokogiri::HTML(open(SUBJECT_URL))
 
     subject_urls = []
     elements = doc.css('a')
     elements.each do |element|
       match = /[A-Z]{4}/.match(element.attributes['href'].value)
-      subject_urls << "#{BASE_URL}#{match}" if !subject_urls.include? match 
+      subject_urls << match.to_s if match
     end
-
-    subject_urls.uniq
+    subject_urls.uniq!
+    subject_urls.collect! { |subject| "#{BASE_URL}/#{subject}" }
   end
 
   # Return array of all section urls

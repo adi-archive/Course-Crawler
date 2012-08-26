@@ -4,3 +4,4 @@ nohup.out
 .bundle
 .rvmrc
 scraper.log
+.DS_Store
