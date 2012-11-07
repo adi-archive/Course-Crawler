@@ -24,7 +24,7 @@ class Subject
       subject_urls << match.to_s if match
     end
     subject_urls.uniq!
-    subject_urls.collect! { |subject| "#{BASE_URL}/#{subject}" }
+    subject_urls.collect! { |subject| "#{BASE_URL}/#{subject}/" }
   end
 
   # Return array of all section urls
@@ -64,7 +64,7 @@ class Subject
       section_elements = doc.css('a')
       section_elements.each do |a|
         match = /[A-Z0-9]+-[0-9]+-[0-9]+/.match(a.attributes['href'].value)
-        section_urls << "#{BASE_URL}/#{subject}/#{match.to_s}" if match
+        section_urls << "#{BASE_URL}/#{subject}/#{match.to_s}/" if match
       end
 
       # Return array of section urls with duplicates removed
