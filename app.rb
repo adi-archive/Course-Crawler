@@ -26,11 +26,11 @@ system "rake db:seed"
 
 # Get subject urls
 subject_urls = Subject.get_subject_urls
-puts "Loaded subject urls"
+puts "Loaded #{subject_urls.length} subject urls"
 
 # Get section urls from subject urls
 section_urls = Subject.get_section_urls(subject_urls)
-puts "Loaded section urls"
+puts "Loaded #{section_urls.length} section urls"
 
 # Crawl sections
 Section.crawl(section_urls)

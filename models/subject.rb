@@ -20,7 +20,7 @@ class Subject
     subject_urls = []
     elements = doc.css('a')
     elements.each do |element|
-      match = /[A-Z]{4}/.match(element.attributes['href'].value)
+      match = /[A-Z]{4}\/.+$/.match(element.attributes['href'].value)
       subject_urls << match.to_s if match
     end
     subject_urls.uniq!
@@ -56,15 +56,15 @@ class Subject
   # Crawls subject html page for subject's section urls
   def self.section_urls_request(subject_url) 
     request = Typhoeus::Request.new(subject_url)
+    subject = /[A-Z]{4}/.match(subject_url).to_s
     request.on_complete do |response|
       doc = Nokogiri::HTML(response.body)
 
       section_urls = []
       section_elements = doc.css('a')
       section_elements.each do |a|
-        if a.content =~ /[A-Z0-9]+-[0-9]+-[0-9]+/
-          section_urls << "#{subject_url}#{a.content}"
-        end
+        match = /[A-Z0-9]+-[0-9]+-[0-9]+/.match(a.attributes['href'].value)
+        section_urls << "#{BASE_URL}/#{subject}/#{match.to_s}" if match
       end
 
       # Return array of section urls with duplicates removed
